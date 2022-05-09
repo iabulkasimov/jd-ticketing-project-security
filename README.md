@@ -1,1 +1,2 @@
-# jd-ticketing-project-security
+# jd-ticketing-project
+Ticketing Project MVC
