@@ -14,6 +14,7 @@ import com.cybertek.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,21 +28,16 @@ public class UserServiceImpl implements UserService{
     private TaskService taskService;
 //    private UserMapper userMapper;
     private MapperUtil mapperUtil;
+    private PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository, @Lazy ProjectService projectService,
-                           TaskService taskService, MapperUtil mapperUtil) {
+                           TaskService taskService, MapperUtil mapperUtil, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.projectService = projectService;
         this.taskService = taskService;
         this.mapperUtil = mapperUtil;
+        this.passwordEncoder = passwordEncoder;
     }
-//    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper,
-//                           @Lazy ProjectService projectService, TaskService taskService){
-//        this.userRepository = userRepository;
-//        this.userMapper = userMapper;
-//        this.projectService = projectService;
-//        this.taskService = taskService;
-//    }
 
     @Override
     public List<UserDTO> listAllUsers() {
@@ -61,8 +57,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void save(UserDTO dto) {
-//        User obj = userMapper.convertToEntity(dto);
+
+        User foundUser = userRepository.findByUserName(dto.getUserName());
+        dto.setEnabled(true);
+
         User obj = mapperUtil.convert(dto,new User());
+        obj.setPassWord(passwordEncoder.encode(obj.getPassWord()));
         userRepository.save(obj);
     }
 
