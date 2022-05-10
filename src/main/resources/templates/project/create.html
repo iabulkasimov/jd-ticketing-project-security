@@ -32,14 +32,12 @@
                                 <div class="panel-body">
 
                                     <!-- ------------------------FORM START----------------------------- -->
-                                    <form class="needs-validation" novalidate th:action="@{/project/create}"
-                                          method="post" th:object="${project}">
+                                    <form class="needs-validation" novalidate th:action="@{/project/create}" method="post" th:object="${project}">
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="col-form-label">Project Name</label>
-                                                    <input id="projectname" type="text" placeholder="project name"
-                                                           th:field="*{projectName}" class="form-control" required>
+                                                    <input id="projectname" type="text" placeholder="project name" th:field="*{projectName}" class="form-control" required>
                                                     <div class="invalid-feedback">Please enter project name.</div>
                                                 </div>
                                             </div>
@@ -48,8 +46,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="col-form-label">Project Code</label>
-                                                    <input id="projectcode" type="text" placeholder="project code"
-                                                           th:field="*{projectCode}" class="form-control" required>
+                                                    <input id="projectcode" type="text" placeholder="project code" th:field="*{projectCode}" class="form-control" required>
                                                     <div class="invalid-feedback">Please enter project code.</div>
                                                 </div>
                                             </div>
@@ -58,12 +55,9 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label>Assigned Manager</label>
-                                                    <select th:field="*{assignedManager}" class="custom-select"
-                                                            required="required">
+                                                    <select th:field="*{assignedManager}" class="custom-select" required="required">
                                                         <option th:value=" ''" th:text="Select"></option>
-                                                        <option th:each="manager : ${managers}"
-                                                                th:value="${manager.userName}"
-                                                                th:text="${manager.firstName + ' ' + manager.lastName}"></option>
+                                                        <option th:each="manager : ${managers}" th:value="${manager.userName}" th:text="${manager.firstName + ' ' + manager.lastName}"></option>
                                                     </select>
                                                     <div class="invalid-feedback">Please choose manager</div>
                                                 </div>
@@ -87,16 +81,14 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label>Project Detail</label>
-                                                    <textarea class="form-control" th:field="*{projectDetail}"
-                                                              required></textarea>
+                                                    <textarea class="form-control" th:field="*{projectDetail}"required></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
                                                 <div class="float-right">
-                                                    <button class="btn btn-success rounded-0" type="submit">Save
-                                                    </button>
+                                                    <button class="btn btn-success rounded-0" type="submit">Save</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -114,6 +106,7 @@
                 </div>
 
 
+
                 <!-- ------------------------TABLE START----------------------------- -->
 
                 <div class="row">
@@ -121,7 +114,7 @@
                         <div class="col-md-12">
                             <section class="panel">
                                 <header class="panel-heading">
-                                    <h2 class="panel-title">Project List</h2>
+                                    <h2 class="panel-title">User List</h2>
                                 </header>
                                 <div class="panel-body">
                                     <div class="table-responsive">
@@ -144,18 +137,9 @@
                                                 <td th:text="${project.assignedManager.firstName + ' ' + project.assignedManager.lastName}"></td>
                                                 <td th:text="${project.projectStatus}"></td>
                                                 <td>
-                                                    <a th:href="@{/project/update/{id}(id=${project.getProjectCode()})}">
-                                                        <button type="button" class="btn btn-warning rounded-0">Update
-                                                        </button>
-                                                    </a>
-                                                    <a th:href="@{/project/delete/{id}(id=${project.getProjectCode()})}">
-                                                        <button type="button" class="btn btn-danger rounded-0">Delete
-                                                        </button>
-                                                    </a>
-                                                    <a th:href="@{/project/complete/{id}(id=${project.getProjectCode()})}">
-                                                        <button type="button" class="btn btn-info rounded-0">Complete
-                                                        </button>
-                                                    </a>
+                                                    <a th:href="@{/project/update/{id}(id=${project.getProjectCode()})}"class="btn btn-warning rounded-0">Update</a>
+                                                    <a th:href="@{/project/delete/{id}(id=${project.getProjectCode()})}"><button type="button" class="btn btn-danger rounded-0">Delete</button></a>
+                                                    <a th:href="@{/project/complete/{id}(id=${project.getProjectCode()})}"class="btn btn-info rounded-0">Complete</a>
                                                 </td>
                                             </tr>
                                             </tbody>

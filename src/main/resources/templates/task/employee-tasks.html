@@ -57,14 +57,14 @@
                         <div class="col-md-12">
                             <section class="panel">
                                 <header class="panel-heading">
-<!--                                    <h2 class="panel-title">User List</h2>-->
+
                                 </header>
                                 <div class="panel-body">
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
                                             <tr>
-                                                <th scope="col">Project</th>
+                                                <th scope="col">Project </th>
                                                 <th scope="col">Task Subject</th>
                                                 <th scope="col">Assigned Employee</th>
                                                 <th scope="col">Assigned Date</th>
@@ -76,14 +76,10 @@
                                             <tr th:each="task : ${tasks}">
                                                 <td th:text="${task.project.projectCode +'-'+task.project.projectName}" />
                                                 <td th:text="${task.taskSubject}" />
-                                                <td th:text="${task.assignedEmployee.firstName + '-' + task.assignedEmployee.lastName}" />
+                                                <td th:text="${task.assignedEmployee.firstName +' '+ task.assignedEmployee.lastName}" />
                                                 <td th:text="${#temporals.format(task.assignedDate, 'MM/dd/yyyy')}" />
                                                 <td th:text="${task.taskStatus}" />
-                                                <td>
-                                                    <a class="btn btn-warning rounded-0" th:href="@{/task/employee/edit/{id}(id=${task.id})}">
-                                                        Update
-                                                    </a>
-                                                </td>
+                                                <td><a class="btn btn-warning rounded-0" th:href="@{/task/employee/edit/{id}(id=${task.id})}">Update</a> </td>
                                             </tr>
                                             </tbody>
                                         </table>
