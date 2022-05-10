@@ -13,6 +13,7 @@ import com.cybertek.service.TaskService;
 import com.cybertek.service.UserService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -97,7 +98,12 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<ProjectDTO> ListAllProjectDetails() {
-        UserDTO currentUserDTO = userService.findByUserName("mike@abc.com");
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        UserDTO currentUserDTO = userService.findByUserName(username);
+        //UserDTO currentUserDTO = userService.findByUserName("mike@abc.com");
+
         User user = userMapper.convertToEntity(currentUserDTO);
         List<Project> list = projectRepository.findAllByAssignedManager(user);
 
